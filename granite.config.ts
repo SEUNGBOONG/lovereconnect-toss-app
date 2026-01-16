@@ -1,20 +1,21 @@
-import { defineConfig } from '@apps-in-toss/web-framework/config';
+import { defineConfig } from "@apps-in-toss/web-framework/config";
 
 export default defineConfig({
-  appName: 'lovereconnect',
+  appName: "lovereconnect",
   brand: {
-    displayName: '러브리커넥트', // 화면에 노출될 앱의 한글 이름으로 바꿔주세요.
-    primaryColor: '#d5356b', // 화면에 노출될 앱의 기본 색상으로 바꿔주세요.
-    icon: '', // 화면에 노출될 앱의 아이콘 이미지 주소로 바꿔주세요.
+    displayName: "러브리커넥트", // 화면에 노출될 앱의 한글 이름으로 바꿔주세요.
+    primaryColor: "#d5356b", // 화면에 노출될 앱의 기본 색상으로 바꿔주세요.
+    icon: "", // 화면에 노출될 앱의 아이콘 이미지 주소로 바꿔주세요.
+    bridgeColorMode: "inverted",
   },
   web: {
-    host: 'localhost',
+    host: "localhost",
     port: 5173,
     commands: {
-      dev: 'vite',
-      build: 'vite build',
+      dev: "pnpm dev",
+      build: "pnpm build",
     },
   },
   permissions: [],
-  outdir: 'dist',
+  outdir: "dist",
 });
