@@ -1,11 +1,18 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "./pages/HomePage.tsx";
+import HomePage from "./pages/main/HomePage.tsx";
+import PrivacySafePage from "./pages/main/PrivacySafePage.tsx";
+import ServiceGuidePage from "./pages/main/ServiceGuidePage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 
 export default function App() {
   return (
     <Routes>
+      {/* 메인페이지 */}
       <Route path="/" element={<HomePage />} />
+      <Route path="/privacy-safe" element={<PrivacySafePage />} />
+      <Route path="/service-guide" element={<ServiceGuidePage />} />
+
+      {/* Auth */}
       <Route path="/login" element={<LoginPage />} />
       {/*<Route path="/signup" element={<SignupPage />} />*/}
 
