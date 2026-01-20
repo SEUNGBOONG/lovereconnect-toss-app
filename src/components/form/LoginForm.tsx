@@ -1,12 +1,14 @@
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@toss/tds-mobile";
-
+import { useNavigate } from "react-router-dom";
 import { NormalInput } from "./NormalInput";
 import { type LoginFormData, loginSchema } from "../../schemas/memberSchema";
 import { useLogin } from "../../hooks/useAuth";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   const methods = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
@@ -48,9 +50,7 @@ export default function LoginForm() {
           variant="weak"
           size="medium"
           display="block"
-          onClick={() => {
-            alert("회원가입은 다음 단계에서 연결");
-          }}
+          onClick={() => navigate("/signup")}
         >
           아직 회원이 아니신가요? 회원가입하기
         </Button>
