@@ -9,6 +9,7 @@ import { ThemeProvider } from "@toss/tds-mobile";
 
 import { TossProviders } from "./providers/TossProviders";
 import { isTossApp } from "./lib/isTossApp";
+import OverlayRenderer from "./components/overlay/OverlayRenderer.tsx";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
     <TossProviders>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
+          <OverlayRenderer />
           <App />
         </BrowserRouter>
       </QueryClientProvider>
@@ -25,6 +27,7 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
+          <OverlayRenderer />
           <div className="min-h-screen w-full">
             <App />
           </div>
