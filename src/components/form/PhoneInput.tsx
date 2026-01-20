@@ -7,7 +7,7 @@ import { Button } from "@toss/tds-mobile";
 import { useSendPhoneCode } from "../../hooks/usePhoneAuth.ts";
 import PhoneVerifyModal from "../overlay/modal/PhoneVerifyModal.tsx";
 import { useOverlay } from "../../hooks/useOverlay.ts";
-import { cn } from "../../lib/utils.ts";
+import { NormalInput } from "./NormalInput.tsx";
 
 interface PhoneInputProps {
   name: string;
@@ -25,7 +25,7 @@ export const PhoneInput = ({
   disabled = false,
 }: PhoneInputProps) => {
   const {
-    register,
+    // register,
     getValues,
     formState: { errors },
   } = useFormContext();
@@ -67,25 +67,9 @@ export const PhoneInput = ({
 
   return (
     <div className="flex flex-col space-y-1">
-      {/* label */}
-      <label htmlFor={name} className="text-sm font-medium text-gray-900">
-        {label}
-      </label>
-
       <div className="flex items-center gap-2">
         {/* input */}
-
-        <input
-          id={name}
-          placeholder={placeholder}
-          readOnly={isVerified}
-          {...register(name)}
-          className={cn(
-            "flex-1 rounded-md border px-3 py-2 text-sm outline-none transition",
-            isVerified && "bg-gray-100 text-gray-500",
-            error ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-gray-400",
-          )}
-        />
+        <NormalInput name={name} label={label} placeholder={placeholder} />
 
         {/* button */}
         {isVerified ? (
@@ -103,7 +87,6 @@ export const PhoneInput = ({
             loading={isPending}
             variant="fill"
             size="small"
-            className="!bg-main-pink"
           >
             {buttonText}
           </Button>
