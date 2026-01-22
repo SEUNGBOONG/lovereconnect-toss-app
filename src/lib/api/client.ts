@@ -12,7 +12,8 @@ export async function apiClient<T>(path: string, options?: RequestInit): Promise
 
   const data = await res.json().catch(() => ({}));
 
-  if (res.status === 401) {
+  // 인증 만료
+  if (res.status === 401 && (data.code === "T001" || data.code === "T002")) {
     throw {
       type: "AUTH_EXPIRED",
       code: data.code,
@@ -25,7 +26,7 @@ export async function apiClient<T>(path: string, options?: RequestInit): Promise
     throw {
       type: "API_ERROR",
       code: data.code || "NETWORK_ERROR",
-      message: data.message || "서버 오류",
+      message: data.message || "서버와 통신할 수 없습니다.",
       status: res.status,
     };
   }
