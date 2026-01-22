@@ -17,6 +17,7 @@ export const errorMessages = {
     required: "비밀번호를 입력해주세요.",
   },
   passwordConfirm: {
+    required: "비밀번호를 다시 입력해주세요.",
     notMatch: "비밀번호가 일치하지 않습니다.",
   },
   birth: {
@@ -28,6 +29,7 @@ export const errorMessages = {
 
     dayRequired: "출생 일을 입력해주세요.",
     dayFormat: "출생 일은 01~31 형식이어야 합니다.",
+    required: "생년월일을 선택해주세요.",
 
     invalidDate: "유효한 날짜가 아닙니다.",
   },
