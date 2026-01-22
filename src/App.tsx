@@ -2,7 +2,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/main/HomePage.tsx";
 import PrivacySafePage from "./pages/main/PrivacySafePage.tsx";
 import ServiceGuidePage from "./pages/main/ServiceGuidePage.tsx";
-import LoginPage from "./pages/LoginPage.tsx";
+import LoginPage from "./pages/auth/LoginPage.tsx";
+import SignupPage from "./pages/auth/SignUpPage.tsx";
 
 export default function App() {
   return (
@@ -14,7 +15,7 @@ export default function App() {
 
       {/* Auth */}
       <Route path="/login" element={<LoginPage />} />
-      {/*<Route path="/signup" element={<SignupPage />} />*/}
+      <Route path="/signup" element={<SignupPage />} />
 
       {/* fallback */}
       <Route path="*" element={<Navigate to="/login" replace />} />
