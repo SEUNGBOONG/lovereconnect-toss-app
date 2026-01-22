@@ -12,19 +12,10 @@ export const PasswordInputWithConfirm = ({
   passwordField,
   confirmField,
 }: PasswordInputWithConfirmProps) => {
-  const {
-    formState: { errors },
-    watch,
-  } = useFormContext();
+  const {} = useFormContext();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
-  const password = watch(passwordField);
-  const confirm = watch(confirmField);
-  const passwordsMatch = confirm && password === confirm;
-
-  const confirmError = errors[confirmField]?.message as string | undefined;
 
   return (
     <div className="flex flex-col space-y-4">
@@ -60,12 +51,6 @@ export const PasswordInputWithConfirm = ({
         >
           {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
         </button>
-
-        {(confirmError || (confirm && !passwordsMatch)) && (
-          <p className="mt-1 text-xs text-red-500">
-            {confirmError || "비밀번호가 일치하지 않습니다."}
-          </p>
-        )}
       </div>
     </div>
   );

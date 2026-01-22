@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { errorMessages as e } from "../constants/errorMessages.ts";
-import { MBTI_LIST } from "../constants/mbtiList.ts";
+import { errorMessages as e } from "../constants/errorMessages";
+import { MBTI_LIST } from "../constants/mbtiList";
 
 export const memberSchema = z
   .object({
@@ -9,11 +9,11 @@ export const memberSchema = z
 
     email: z.email({ message: e.email.invalid }),
     password: z.string().min(10, { message: e.password.min }),
+    passwordConfirm: z.string().min(1, { message: e.passwordConfirm.required }),
 
     phoneNumber: z.string().regex(/^010\d{8}$/, { message: e.phoneNumber.invalid }),
 
     gender: z.enum(["MALE", "FEMALE"], { message: e.gender.required }),
-
     mbti: z.enum(MBTI_LIST, { message: e.mbti.required }),
 
     instagramId: z
@@ -26,44 +26,37 @@ export const memberSchema = z
         { message: e.instagramId.edgeDotUnderscore },
       ),
 
-    birthYear: z
-      .string()
-      .nonempty({ message: e.birth.yearRequired })
-      .regex(/^\d{4}$/, { message: e.birth.yearFormat }),
+    // 생년월일 (폼 필드)
+    birthYear: z.string().nonempty({ message: e.birth.yearRequired }),
+    birthMonth: z.string().nonempty({ message: e.birth.monthRequired }),
+    birthDay: z.string().nonempty({ message: e.birth.dayRequired }),
 
-    birthMonth: z
-      .string()
-      .nonempty({ message: e.birth.monthRequired })
-      .regex(/^(0[1-9]|1[0-2])$/, { message: e.birth.monthFormat }),
-
-    birthDay: z
-      .string()
-      .nonempty({ message: e.birth.dayRequired })
-      .regex(/^([0-2][0-9]|3[0-1])$/, { message: e.birth.dayFormat }),
+    // DatePicker 검증 트리거용
+    birthDate: z.string().min(1, { message: e.birth.required }),
 
     privacyAgree: z.boolean().refine((v) => v === true, { message: e.agreement.required }),
     useAgree: z.boolean().refine((v) => v === true, { message: e.agreement.required }),
     emailAgree: z.boolean().optional(),
   })
+  // 비밀번호 일치 검증
+  .refine((v) => v.password === v.passwordConfirm, {
+    message: e.passwordConfirm.notMatch,
+    path: ["passwordConfirm"],
+  })
+  // 날짜 조합 검증
   .refine(
-    (values) => {
-      const { birthYear, birthMonth, birthDay } = values;
-
-      // 조합된 날짜가 유효한지 체크
-      const dateStr = `${birthYear}-${birthMonth}-${birthDay}`;
-      const date = new Date(dateStr);
-
-      const valid =
+    (v) => {
+      const date = new Date(`${v.birthYear}-${v.birthMonth}-${v.birthDay}`);
+      return (
         !isNaN(date.getTime()) &&
-        date.getFullYear().toString() === birthYear &&
-        (date.getMonth() + 1).toString().padStart(2, "0") === birthMonth &&
-        date.getDate().toString().padStart(2, "0") === birthDay;
-
-      return valid;
+        date.getFullYear().toString() === v.birthYear &&
+        (date.getMonth() + 1).toString().padStart(2, "0") === v.birthMonth &&
+        date.getDate().toString().padStart(2, "0") === v.birthDay
+      );
     },
     {
       message: e.birth.invalidDate,
-      path: ["birthDay"], // 여기 에러 표시
+      path: ["birthDay"],
     },
   );
 

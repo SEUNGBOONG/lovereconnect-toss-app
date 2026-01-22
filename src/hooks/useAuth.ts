@@ -6,8 +6,9 @@ import { useSetAtom } from "jotai";
 import { apiClient } from "../lib/api/client.ts";
 import { API } from "../lib/api/endpoints.ts";
 import { authAtom } from "../atoms/authAtom.ts";
-import type { LoginFormData, MemberFormData } from "../schemas/memberSchema.ts";
+import type { LoginFormData } from "../schemas/memberSchema.ts";
 import type { ApiResponse, ApiError } from "../types/api.ts";
+import type { SignUpRequest } from "../types/signup.ts";
 
 /* ======================
  * 회원가입
@@ -15,7 +16,7 @@ import type { ApiResponse, ApiError } from "../types/api.ts";
 export const useSignup = () => {
   const navigate = useNavigate();
 
-  return useMutation<ApiResponse<null>, ApiError, MemberFormData>({
+  return useMutation<ApiResponse<null>, ApiError, SignUpRequest>({
     mutationFn: (payload) =>
       apiClient(API.MEMBER.SIGNUP, {
         method: "POST",
