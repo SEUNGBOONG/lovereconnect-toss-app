@@ -92,7 +92,7 @@ export default function SignUpForm() {
           size="large"
           display="block"
           loading={signUpMutation.isPending}
-          disabled={signUpMutation.isPending}
+          disabled={signUpMutation.isPending || !methods.formState.isValid}
           className="bg-main-pink !h-12 !rounded-xl"
         >
           회원가입
