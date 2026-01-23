@@ -19,7 +19,7 @@ export default function WaitingPage() {
   const info = infoRes.data;
 
   return (
-    <main className="relative flex min-h-screen max-w-md flex-col items-center justify-center overflow-hidden px-4 py-6">
+    <main className="relative mx-auto flex min-h-screen max-w-md flex-col items-center justify-center overflow-hidden px-4 py-6">
       {/* 상단 애니메이션 영역 */}
       <motion.div
         className="text-center"
