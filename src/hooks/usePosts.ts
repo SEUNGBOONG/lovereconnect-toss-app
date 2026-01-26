@@ -77,6 +77,39 @@ export const useCreatePost = () => {
 };
 
 /* =========================
+ * 게시글 수정
+ * ========================= */
+interface UpdatePostPayload {
+  postId: number;
+  title: string;
+  content: string;
+}
+
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<ApiResponse<Post>, ApiError, UpdatePostPayload>({
+    mutationFn: ({ postId, ...payload }) =>
+      apiClient<ApiResponse<Post>>(`${API.COMMUNITY.POSTS}/${postId}`, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+      }),
+
+    onSuccess: (_, { postId }) => {
+      queryClient.invalidateQueries({
+        queryKey: ["post", postId],
+      });
+    },
+
+    onError: (err) => {
+      toast.error("게시글 수정 실패", {
+        description: err.message ?? "다시 시도해주세요.",
+      });
+    },
+  });
+};
+
+/* =========================
  * 게시글 삭제
  * ========================= */
 export const useDeletePost = () => {
