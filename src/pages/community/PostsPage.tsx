@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@toss/tds-mobile";
 import { Pencil } from "lucide-react";
-import PostsList from "../../components/community/PostsList.tsx";
+import PostsList from "../../components/community/post/PostsList.tsx";
 
 export default function PostsPage() {
   const navigate = useNavigate();
