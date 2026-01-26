@@ -1,17 +1,23 @@
 import { useAnimate } from "framer-motion";
-import { ArrowRight, Heart } from "lucide-react";
+import { ArrowRight, Heart, LogOut } from "lucide-react";
 import { Button } from "@toss/tds-mobile";
 import { useNavigate } from "react-router-dom";
 import { useAtomValue } from "jotai";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { authAtom } from "../../atoms/authAtom.ts";
 import { useLandingAnimation } from "../../hooks/useLandingAnimation.ts";
-import { PopAnimatedText } from "../../styles/PopAnimatedText.tsx";
+import { useLogout } from "../../hooks/useAuth.ts";
 import FloatingButtons from "../../components/layout/FloatingButtons/FloatingButtons.tsx";
+import { PopAnimatedText } from "../../styles/PopAnimatedText.tsx";
 
 export default function HomePage() {
+  const queryClient = useQueryClient();
+  const logout = useLogout();
+
+  const { isLoggedIn, user } = useAtomValue(authAtom);
+
   const navigate = useNavigate();
-  const { isLoggedIn } = useAtomValue(authAtom);
 
   const [h1Scope, animateH1] = useAnimate();
   const [descScope, animateDesc] = useAnimate();
@@ -27,17 +33,44 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen w-full px-4 pb-28 pt-16">
+      {/* 로그인 상태 표시 */}
+      {isLoggedIn && user && (
+        <div className="absolute right-4 top-4 flex items-center gap-1 text-xs text-gray-400">
+          <button
+            type="button"
+            className="font-medium text-gray-600 hover:underline"
+            // onClick={() => openMyPage()}
+          >
+            {user.nickname}
+          </button>
+          <span>님</span>
+
+          <button
+            onClick={() => {
+              if (confirm("로그아웃 할까요?")) {
+                logout.mutate();
+                queryClient.clear();
+              }
+            }}
+            className="ml-1 opacity-60 hover:opacity-100"
+            aria-label="로그아웃"
+          >
+            <LogOut className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
+
       <div className="mx-auto flex max-w-md flex-col items-center text-center">
         {/* ❤️ Heart animation */}
         <div className="mb-10 flex items-center justify-center">
           <div className="relative flex h-10 w-10 items-center justify-center">
             {/* pulse wrapper */}
-            <div className="animate-heart-pulse absolute inset-0 flex items-center justify-center">
-              <Heart className="fill-main-pink h-9 w-9 opacity-60" stroke="none" />
+            <div className="absolute inset-0 flex animate-heart-pulse items-center justify-center">
+              <Heart className="h-9 w-9 fill-main-pink opacity-60" stroke="none" />
             </div>
 
             {/* base heart */}
-            <Heart className="fill-main-pink h-8 w-8" stroke="none" />
+            <Heart className="h-8 w-8 fill-main-pink" stroke="none" />
           </div>
         </div>
 
