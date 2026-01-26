@@ -1,5 +1,6 @@
 export const API = {
   AUTH: {
+    ME: "/auth/me",
     CHECK_EMAIL: "/email/check-email",
     SEND_CODE: "/email/send-code",
     VERIFY_CODE: "/email/verify-code",

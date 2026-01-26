@@ -11,6 +11,7 @@ import { TossProviders } from "./providers/TossProviders";
 import { isTossApp } from "./lib/isTossApp";
 import OverlayRenderer from "./components/overlay/OverlayRenderer.tsx";
 import { Toaster } from "sonner";
+import AuthBootstrap from "./providers/AuthBootstrap.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,8 +20,10 @@ createRoot(document.getElementById("root")!).render(
     <TossProviders>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <OverlayRenderer />
-          <App />
+          <AuthBootstrap>
+            <OverlayRenderer />
+            <App />
+          </AuthBootstrap>
         </BrowserRouter>
         <Toaster position="top-center" richColors closeButton />
       </QueryClientProvider>
@@ -29,10 +32,12 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <OverlayRenderer />
-          <div className="min-h-screen w-full">
-            <App />
-          </div>
+          <AuthBootstrap>
+            <OverlayRenderer />
+            <div className="min-h-screen w-full">
+              <App />
+            </div>
+          </AuthBootstrap>
         </BrowserRouter>
         <Toaster position="top-center" richColors closeButton />
       </QueryClientProvider>

@@ -41,7 +41,15 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const setAuth = useSetAtom(authAtom);
 
-  return useMutation<ApiResponse<null>, ApiError, LoginFormData>({
+  return useMutation<
+    ApiResponse<{
+      memberId: number;
+      memberName: string;
+      memberNickName: string;
+    }>,
+    ApiError,
+    LoginFormData
+  >({
     mutationFn: ({ email, password }) =>
       apiClient(API.MEMBER.LOGIN, {
         method: "POST",
@@ -50,11 +58,22 @@ export const useLogin = () => {
           memberPassword: password,
         }),
       }),
-    onSuccess: () => {
-      setAuth({ isLoggedIn: true });
+
+    onSuccess: (res) => {
+      setAuth((prev) => ({
+        ...prev,
+        isLoggedIn: true,
+        initialized: true,
+        user: {
+          nickname: res.data.memberNickName,
+          name: res.data.memberName,
+        } as any, // ← partial 명시적으로 허용
+      }));
+
       toast.success("로그인 성공");
       navigate("/");
     },
+
     onError: (err) => {
       toast.error("로그인 실패", {
         description: err.message,
@@ -73,7 +92,13 @@ export const useLogout = () => {
   return useMutation<ApiResponse<null>, ApiError>({
     mutationFn: () => apiClient(API.MEMBER.LOGOUT, { method: "POST" }),
     onSuccess: () => {
-      setAuth({ isLoggedIn: false });
+      setAuth((prev) => ({
+        ...prev,
+        isLoggedIn: false,
+        user: null,
+        initialized: true,
+      }));
+
       toast.success("로그아웃 되었습니다");
       navigate("/login");
     },
