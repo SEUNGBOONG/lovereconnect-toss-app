@@ -11,6 +11,9 @@ import WaitingPage from "./pages/match/WaitingPage";
 import MatchRegisterPage from "./pages/match/MatchRegisterPage";
 import MatchedPage from "./pages/match/MatchedPage.tsx";
 import PostsPage from "./pages/community/PostsPage.tsx";
+import PostDetailPage from "./pages/community/PostDetailPage.tsx";
+import PostWritePage from "./pages/community/PostWritePage.tsx";
+import PostEditPage from "./pages/community/PostEditPage.tsx";
 
 export default function App() {
   return (
@@ -31,9 +34,9 @@ export default function App() {
 
       {/* Posts  */}
       <Route path="/posts" element={<PostsPage />} />
-      {/*<Route path="/posts/write" element={<PostWritePage />} />*/}
-      {/*<Route path="/posts/:postId" element={<PostDetailPage />} />*/}
-      {/*<Route path="/posts/:postId/edit" element={<PostEditPage />} />*/}
+      <Route path="/posts/write" element={<PostWritePage />} />
+      <Route path="/posts/:postId" element={<PostDetailPage />} />
+      <Route path="/posts/:postId/edit" element={<PostEditPage />} />
 
       {/* fallback */}
       {/*<Route path="*" element={<Navigate to="/login" replace />} />*/}
