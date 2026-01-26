@@ -30,6 +30,30 @@ export const usePostPaged = ({ page, size }: { page: number; size: number }) => 
 };
 
 /* =========================
+ * 게시글 상세 조회
+ * ========================= */
+export const usePostDetail = (postId: number, enabled = true) => {
+  return useQuery<ApiResponse<Post>, ApiError>({
+    queryKey: ["post", postId],
+
+    queryFn: () =>
+      apiClient<ApiResponse<Post>>(`${API.COMMUNITY.POSTS}/${postId}`, {
+        method: "GET",
+      }),
+
+    enabled: enabled && !!postId,
+
+    staleTime: 0,
+    gcTime: 1000 * 60 * 10,
+
+    refetchOnMount: true,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+  });
+};
+
+/* =========================
  * 게시글 작성
  * ========================= */
 export const useCreatePost = () => {
