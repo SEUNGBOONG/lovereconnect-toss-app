@@ -80,8 +80,7 @@ export default function CommentItem({
 
   return (
     <div className={depth === 0 ? "border-b border-gray-100 py-2.5" : "py-2.5"}>
-      {/* ===== header ===== */}
-      <div className="group flex items-center gap-2 text-sm">
+      <div className="flex items-center gap-2 text-sm">
         <span className={depth === 0 ? "font-medium text-main-pink" : "font-medium text-gray-700"}>
           {comment.writerNickname}
         </span>
@@ -91,7 +90,7 @@ export default function CommentItem({
         {comment.isMine && (
           <button
             onClick={openActions}
-            className="ml-auto rounded p-1 text-gray-400 opacity-0 transition hover:bg-gray-100 group-hover:opacity-100"
+            className="ml-auto rounded p-1 text-gray-400 hover:bg-gray-100"
           >
             <MoreVertical className="h-4 w-4" />
           </button>
