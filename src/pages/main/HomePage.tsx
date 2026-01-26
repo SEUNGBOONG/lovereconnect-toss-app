@@ -134,7 +134,7 @@ export default function HomePage() {
             size="large"
             display="block"
             className="!h-12 !rounded-xl"
-            onClick={() => navigate("/posts")}
+            onClick={() => navigate(isLoggedIn ? "/posts" : "/login")}
           >
             👥 커뮤니티 보기
           </Button>
