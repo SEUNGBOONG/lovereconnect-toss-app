@@ -12,10 +12,8 @@ export async function apiClient<T>(path: string, options?: RequestInit): Promise
 
   const data = await res.json().catch(() => ({}));
 
-  // 인증 만료 / 권한 없음 → 로그인 페이지로 이동
   if (res.status === 401 || res.status === 403) {
-    if (data?.code === "T001" || data?.code === "T002" || path === "/auth/me") {
-      window.location.href = "/login";
+    if (data?.code === "T001" || data?.code === "T002") {
       throw {
         type: "AUTH_EXPIRED",
         code: data.code,
