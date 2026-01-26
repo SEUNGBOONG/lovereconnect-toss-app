@@ -22,23 +22,17 @@ export default function ActionModal({ onEdit, onDelete }: Props) {
   return (
     <div className="flex w-full flex-col space-y-3">
       {/* 수정 */}
-      <Button display="block" variant="weak" size="medium" onClick={handleEdit}>
+      <Button display="block" variant="fill" color="primary" size="medium" onClick={handleEdit}>
         수정
       </Button>
 
       {/* 삭제 */}
-      <Button
-        display="block"
-        variant="weak"
-        size="medium"
-        onClick={handleDelete}
-        className="!text-red-500"
-      >
+      <Button display="block" variant="weak" color="danger" size="medium" onClick={handleDelete}>
         삭제
       </Button>
 
       {/* 취소 */}
-      <Button display="block" variant="weak" size="medium" onClick={closeOverlay}>
+      <Button display="block" variant="weak" color="dark" size="medium" onClick={closeOverlay}>
         취소
       </Button>
     </div>

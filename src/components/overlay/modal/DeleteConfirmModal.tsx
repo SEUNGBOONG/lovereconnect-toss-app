@@ -29,17 +29,11 @@ export default function DeleteConfirmModal({
 
       {/* 버튼 */}
       <div className="flex gap-2">
-        <Button display="block" variant="weak" size="medium" onClick={closeOverlay}>
+        <Button display="block" variant="weak" color="dark" size="medium" onClick={closeOverlay}>
           취소
         </Button>
 
-        <Button
-          display="block"
-          variant="weak"
-          size="medium"
-          onClick={handleConfirm}
-          className="!text-red-500"
-        >
+        <Button display="block" variant="weak" color="danger" size="medium" onClick={handleConfirm}>
           삭제
         </Button>
       </div>
