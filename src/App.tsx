@@ -14,6 +14,7 @@ import PostsPage from "./pages/community/PostsPage.tsx";
 import PostDetailPage from "./pages/community/PostDetailPage.tsx";
 import PostWritePage from "./pages/community/PostWritePage.tsx";
 import PostEditPage from "./pages/community/PostEditPage.tsx";
+import AttachmentTestPage from "./pages/attachment/AttachmentTestPage.tsx";
 
 export default function App() {
   return (
@@ -32,11 +33,14 @@ export default function App() {
       <Route path="/waiting" element={<WaitingPage />} />
       <Route path="/success" element={<MatchedPage />} />
 
-      {/* Posts  */}
+      {/* Posts */}
       <Route path="/posts" element={<PostsPage />} />
       <Route path="/posts/write" element={<PostWritePage />} />
       <Route path="/posts/:postId" element={<PostDetailPage />} />
       <Route path="/posts/:postId/edit" element={<PostEditPage />} />
+
+      {/* Attachment */}
+      <Route path="/attachment-test" element={<AttachmentTestPage />} />
 
       {/* fallback */}
       {/*<Route path="*" element={<Navigate to="/login" replace />} />*/}
