@@ -1,9 +1,9 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Skeleton } from "@toss/tds-mobile";
-import { usePostPaged } from "../../hooks/usePosts";
-import { Button } from "../ui/button";
-import { cn } from "../../lib/utils";
-import { PinnedNotice } from "./PinnedNotice";
+import { usePostPaged } from "../../../hooks/usePosts.ts";
+import { Button } from "../../ui/button.tsx";
+import { cn } from "../../../lib/utils.ts";
+import { PinnedNotice } from "./PinnedNotice.tsx";
 
 const PAGE_SIZE = 5;
 
