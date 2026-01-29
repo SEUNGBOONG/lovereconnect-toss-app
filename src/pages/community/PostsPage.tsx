@@ -10,8 +10,10 @@ export default function PostsPage() {
     <main className="mx-auto max-w-2xl px-4 py-6">
       <div className="mb-5 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold">커뮤니티</h1>
-          <p className="text-muted-foreground text-sm">자유롭게 이야기하고 정보를 나눠보세요</p>
+          <h1 className="text-xl font-bold">📖 마음정리 커뮤니티</h1>
+          <p className="text-muted-foreground text-sm">
+            감정을 정리하고 자유롭게 이야기를 나눠보세요
+          </p>
         </div>
 
         <Button

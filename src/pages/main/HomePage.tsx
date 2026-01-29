@@ -136,7 +136,7 @@ export default function HomePage() {
             className="!h-12 !rounded-xl"
             onClick={() => navigate(isLoggedIn ? "/posts" : "/login")}
           >
-            👥 커뮤니티 보기
+            👥 마음정리 커뮤니티
           </Button>
         </div>
       </div>
