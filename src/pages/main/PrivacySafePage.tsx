@@ -4,6 +4,7 @@ import { Button } from "@toss/tds-mobile";
 
 export default function PrivacySafePage() {
   const navigate = useNavigate();
+  const OPEN_CHAT_URL = import.meta.env.VITE_KAKAO_OPEN_CHAT;
 
   return (
     <main className="mx-auto max-w-md px-4 pb-4 pt-8">
@@ -166,6 +167,21 @@ export default function PrivacySafePage() {
             서비스 안내 보러가기 →
           </Button>
         </div>
+      </div>
+
+      {/* ================= 문의하기 ================= */}
+      <div className="mt-8 flex justify-center">
+        <button
+          type="button"
+          onClick={() => {
+            if (OPEN_CHAT_URL) {
+              window.open(OPEN_CHAT_URL, "_blank");
+            }
+          }}
+          className="text-sm font-medium text-gray-600 underline decoration-gray-300 underline-offset-4 transition-colors active:text-main-pink active:decoration-main-pink"
+        >
+          문의하기
+        </button>
       </div>
     </main>
   );
