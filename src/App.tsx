@@ -1,3 +1,5 @@
+"use client";
+
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/main/HomePage";
@@ -9,14 +11,19 @@ import SignupPage from "./pages/auth/SignUpPage";
 
 import WaitingPage from "./pages/match/WaitingPage";
 import MatchRegisterPage from "./pages/match/MatchRegisterPage";
-import MatchedPage from "./pages/match/MatchedPage.tsx";
-import PostsPage from "./pages/community/PostsPage.tsx";
-import PostDetailPage from "./pages/community/PostDetailPage.tsx";
-import PostWritePage from "./pages/community/PostWritePage.tsx";
-import PostEditPage from "./pages/community/PostEditPage.tsx";
-import AttachmentTestPage from "./pages/attachment/AttachmentTestPage.tsx";
+import MatchedPage from "./pages/match/MatchedPage";
+
+import PostsPage from "./pages/community/PostsPage";
+import PostDetailPage from "./pages/community/PostDetailPage";
+import PostWritePage from "./pages/community/PostWritePage";
+import PostEditPage from "./pages/community/PostEditPage";
+
+import AttachmentTestPage from "./pages/attachment/AttachmentTestPage";
+import { useNavigationContact } from "./hooks/useNavigationContact.ts";
 
 export default function App() {
+  useNavigationContact();
+
   return (
     <Routes>
       {/* Main */}
@@ -33,7 +40,7 @@ export default function App() {
       <Route path="/waiting" element={<WaitingPage />} />
       <Route path="/success" element={<MatchedPage />} />
 
-      {/* Posts */}
+      {/* Community */}
       <Route path="/posts" element={<PostsPage />} />
       <Route path="/posts/write" element={<PostWritePage />} />
       <Route path="/posts/:postId" element={<PostDetailPage />} />
