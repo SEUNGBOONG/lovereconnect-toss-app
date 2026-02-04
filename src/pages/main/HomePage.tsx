@@ -5,18 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { authAtom } from "../../atoms/authAtom.ts";
-import { useLandingAnimation } from "../../hooks/useLandingAnimation.ts";
-import { useLogout } from "../../hooks/useAuth.ts";
-import FloatingButtons from "../../components/layout/FloatingButtons/FloatingButtons.tsx";
-import { PopAnimatedText } from "../../styles/PopAnimatedText.tsx";
+import { authAtom } from "../../atoms/authAtom";
+import { useLandingAnimation } from "../../hooks/useLandingAnimation";
+import { useLogout } from "../../hooks/useAuth";
+import FloatingButtons from "../../components/layout/FloatingButtons/FloatingButtons";
+import { PopAnimatedText } from "../../styles/PopAnimatedText";
 
 export default function HomePage() {
   const queryClient = useQueryClient();
   const logout = useLogout();
 
   const { isLoggedIn, user } = useAtomValue(authAtom);
-
   const navigate = useNavigate();
 
   const [h1Scope, animateH1] = useAnimate();
@@ -31,16 +30,21 @@ export default function HomePage() {
     buttonsScope,
   });
 
+  /** 로그인 분기 공통 처리 */
+  const requireLogin = (path: string) => {
+    if (!isLoggedIn) {
+      navigate("/toss/login");
+      return;
+    }
+    navigate(path);
+  };
+
   return (
     <main className="relative min-h-screen w-full px-4 pb-28 pt-16">
       {/* 로그인 상태 표시 */}
       {isLoggedIn && user && (
         <div className="absolute right-4 top-4 flex items-center gap-1 text-xs text-gray-400">
-          <button
-            type="button"
-            className="font-medium text-gray-600 hover:underline"
-            // onClick={() => openMyPage()}
-          >
+          <button type="button" className="font-medium text-gray-600 hover:underline">
             {user.nickname}
           </button>
           <span>님</span>
@@ -108,22 +112,20 @@ export default function HomePage() {
             size="large"
             display="block"
             className="!h-12 !rounded-xl"
-            onClick={() => navigate(isLoggedIn ? "/match" : "/login")}
+            onClick={() => requireLogin("/match")}
           >
             ✨ 다시 만나고 싶어요
             <ArrowRight className="ml-1 size-5" />
           </Button>
 
-          {/* 중간 CTA – 배경 있는 버튼 유지 */}
+          {/* 서브 CTA */}
           <Button
             color="primary"
             variant="weak"
             size="large"
             display="block"
             className="!h-12 !rounded-xl"
-            onClick={() =>
-              navigate(isLoggedIn ? "/attachment-test" : "/login?redirect=/attachment-test")
-            }
+            onClick={() => requireLogin("/attachment-test")}
           >
             ☁️ 내 애착 유형 알아보기
           </Button>
@@ -134,7 +136,7 @@ export default function HomePage() {
             size="large"
             display="block"
             className="!h-12 !rounded-xl"
-            onClick={() => navigate(isLoggedIn ? "/posts" : "/login")}
+            onClick={() => requireLogin("/posts")}
           >
             👥 마음정리 커뮤니티
           </Button>
