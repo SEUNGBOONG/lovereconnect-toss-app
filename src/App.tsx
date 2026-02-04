@@ -19,6 +19,7 @@ import PostWritePage from "./pages/community/PostWritePage";
 import PostEditPage from "./pages/community/PostEditPage";
 
 import AttachmentTestPage from "./pages/attachment/AttachmentTestPage";
+import TossLoginPage from "./pages/auth/toss/login/TossLoginPage.tsx";
 import { useNavigationContact } from "./hooks/useNavigationContact.ts";
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
 
       {/* Auth */}
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/toss/login" element={<TossLoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
 
       {/* Match */}
