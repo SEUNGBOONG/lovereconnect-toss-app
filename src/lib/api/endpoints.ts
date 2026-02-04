@@ -13,6 +13,7 @@ export const API = {
   MEMBER: {
     SIGNUP: "/normalMembers",
     LOGIN: "/login",
+    TOSS_LOGIN: "/api/v1/toss/login",
     LOGOUT: "/logout",
     PROFILE: "/profile/me",
     RESET_PASSWORD: "/auth/reset-password",
