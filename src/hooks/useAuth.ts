@@ -9,6 +9,7 @@ import { authAtom } from "../atoms/authAtom.ts";
 import type { LoginFormData } from "../schemas/memberSchema.ts";
 import type { ApiResponse, ApiError } from "../types/api.ts";
 import type { SignUpRequest } from "../types/signup.ts";
+import type { TossAdditionalInfoRequest } from "../utils/toTossAdditionalInfoRequest.ts";
 
 /* ======================
  * 회원가입
@@ -76,6 +77,32 @@ export const useLogin = () => {
 
     onError: (err) => {
       toast.error("로그인 실패", {
+        description: err.message,
+      });
+    },
+  });
+};
+
+/* ======================
+ * 토스 추가 정보 입력
+ * ====================== */
+export const useTossAdditionalInfo = () => {
+  const navigate = useNavigate();
+
+  return useMutation<ApiResponse<null>, ApiError, TossAdditionalInfoRequest>({
+    mutationFn: (payload) =>
+      apiClient(API.MEMBER.TOSS_ADDITIONAL_INFO, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      }),
+
+    onSuccess: () => {
+      toast.success("추가 정보 입력 완료");
+      navigate("/");
+    },
+
+    onError: (err) => {
+      toast.error("추가 정보 입력 실패", {
         description: err.message,
       });
     },
