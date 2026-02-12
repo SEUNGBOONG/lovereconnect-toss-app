@@ -42,10 +42,10 @@ export default function HomePage() {
   return (
     <main className="relative min-h-screen w-full px-4 pb-28 pt-16">
       {/* 로그인 상태 표시 */}
-      {isLoggedIn && user && (
+      {isLoggedIn && (
         <div className="absolute right-4 top-4 flex items-center gap-1 text-xs text-gray-400">
           <button type="button" className="font-medium text-gray-600 hover:underline">
-            {user.nickname}
+            {user?.nickname ?? "회원"}
           </button>
           <span>님</span>
 
