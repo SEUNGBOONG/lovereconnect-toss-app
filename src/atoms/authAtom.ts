@@ -1,12 +1,16 @@
 import { atom } from "jotai";
-import type { MeResponse } from "../lib/api/auth.ts";
+
+export interface AuthUser {
+  memberId?: number;
+  nickname: string;
+}
 
 export const authAtom = atom<{
   isLoggedIn: boolean;
-  user: MeResponse | null;
   initialized: boolean;
+  user: AuthUser | null;
 }>({
   isLoggedIn: false,
-  user: null,
   initialized: false,
+  user: null,
 });
