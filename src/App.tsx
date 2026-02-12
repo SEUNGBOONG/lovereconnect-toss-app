@@ -2,24 +2,23 @@
 
 import { Routes, Route } from "react-router-dom";
 
+import TossLoginPage from "./pages/auth/toss/TossLoginPage.tsx";
+import TossAdditionalInfoPage from "./pages/auth/toss/TossAdditionalInfoPage.tsx";
+
 import HomePage from "./pages/main/HomePage";
 import PrivacySafePage from "./pages/main/PrivacySafePage";
+
 import ServiceGuidePage from "./pages/main/ServiceGuidePage";
-
-import LoginPage from "./pages/auth/LoginPage";
-import SignupPage from "./pages/auth/SignUpPage";
-
 import WaitingPage from "./pages/match/WaitingPage";
 import MatchRegisterPage from "./pages/match/MatchRegisterPage";
-import MatchedPage from "./pages/match/MatchedPage";
 
+import MatchedPage from "./pages/match/MatchedPage";
 import PostsPage from "./pages/community/PostsPage";
 import PostDetailPage from "./pages/community/PostDetailPage";
 import PostWritePage from "./pages/community/PostWritePage";
-import PostEditPage from "./pages/community/PostEditPage";
 
+import PostEditPage from "./pages/community/PostEditPage";
 import AttachmentTestPage from "./pages/attachment/AttachmentTestPage";
-import TossLoginPage from "./pages/auth/toss/login/TossLoginPage.tsx";
 import { useNavigationContact } from "./hooks/useNavigationContact.ts";
 
 export default function App() {
@@ -33,9 +32,10 @@ export default function App() {
       <Route path="/service-guide" element={<ServiceGuidePage />} />
 
       {/* Auth */}
-      <Route path="/login" element={<LoginPage />} />
+      {/*<Route path="/login" element={<LoginPage />} />*/}
       <Route path="/toss/login" element={<TossLoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/toss/additional-info" element={<TossAdditionalInfoPage />} />
+      {/*<Route path="/signup" element={<SignupPage />} />*/}
 
       {/* Match */}
       <Route path="/match" element={<MatchRegisterPage />} />
