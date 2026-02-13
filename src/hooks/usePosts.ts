@@ -13,7 +13,7 @@ interface PostPagedResponse {
   content: Post[];
   totalPages: number;
   totalElements: number;
-  number: number;
+  pageNumber: number;
 }
 
 export const usePostPaged = ({ page, size }: { page: number; size: number }) => {

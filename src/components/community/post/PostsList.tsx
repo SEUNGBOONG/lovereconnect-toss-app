@@ -38,17 +38,17 @@ export default function PostsList() {
 
   if (isError || !data) {
     return (
-      <div className="text-muted-foreground py-20 text-center text-sm">
+      <div className="py-20 text-center text-sm text-muted-foreground">
         게시글을 불러오지 못했습니다.
       </div>
     );
   }
 
-  const { content, totalPages, number } = data.data;
+  const { content, totalPages, pageNumber } = data.data;
 
   if (content.length === 0) {
     return (
-      <div className="text-muted-foreground py-20 text-center text-sm">
+      <div className="py-20 text-center text-sm text-muted-foreground">
         아직 작성된 게시글이 없습니다.
       </div>
     );
@@ -66,7 +66,7 @@ export default function PostsList() {
             role="button"
             tabIndex={0}
             onClick={() => goDetail(post.id)}
-            className="hover:bg-muted/40 group cursor-pointer border-b px-5 py-4 transition last:border-b-0"
+            className="group cursor-pointer border-b px-5 py-4 transition last:border-b-0 hover:bg-muted/40"
           >
             <div className="flex gap-4">
               <div className="w-1 rounded-full bg-main-pink opacity-0 transition group-hover:opacity-100" />
@@ -76,9 +76,9 @@ export default function PostsList() {
                   {post.title}
                 </h2>
 
-                <p className="text-muted-foreground line-clamp-2 text-sm">{post.content}</p>
+                <p className="line-clamp-2 text-sm text-muted-foreground">{post.content}</p>
 
-                <div className="text-muted-foreground pt-1 text-xs">{post.writerNickname}</div>
+                <div className="pt-1 text-xs text-muted-foreground">{post.writerNickname}</div>
               </div>
             </div>
           </li>
@@ -100,8 +100,8 @@ export default function PostsList() {
           <Button
             key={i}
             size="sm"
-            variant={i === number ? "default" : "outline"}
-            className={cn(i === number && "bg-main-pink text-white")}
+            variant={i === pageNumber ? "default" : "outline"}
+            className={cn(i === pageNumber && "bg-main-pink text-white")}
             onClick={() => movePage(i)}
           >
             {i + 1}
