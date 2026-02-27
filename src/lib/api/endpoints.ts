@@ -15,7 +15,7 @@ export const API = {
     LOGIN: "/login",
     TOSS_LOGIN: "/api/v1/toss/login",
     TOSS_ADDITIONAL_INFO: "/api/v1/toss/additional-info",
-    LOGOUT: "/logout",
+    LOGOUT: "/api/v1/toss/logout",
     PROFILE: "/profile/me",
     RESET_PASSWORD: "/auth/reset-password",
   },

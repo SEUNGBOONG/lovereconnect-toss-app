@@ -127,7 +127,7 @@ export const useLogout = () => {
       }));
 
       toast.success("로그아웃 되었습니다");
-      navigate("/login");
+      navigate("/");
     },
   });
 };
