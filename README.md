@@ -2,6 +2,11 @@
 
 > Toss Mini App 전용 재회 매칭 서비스 클라이언트  
 > 단일 탭 WebView 환경에 최적화된 순수 CSR 기반 SPA
+## ✨ Main Screen
+
+<p align="center">
+  <img src="./public/main_screen.png" alt="reconnect main screen" width="720" />
+</p>
 
 ---
 
